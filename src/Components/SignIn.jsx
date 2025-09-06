@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
 import { Button, Checkbox, Form, Input, Flex } from "antd";
 import { useNavigate } from "react-router-dom";
@@ -7,15 +7,18 @@ const SignIn = () => {
   const { formData } = useFormStore();
   const { name, password } = formData;
 
+  const [err, setErr] = useState("");
+
   const navigate = useNavigate("");
   const onFinish = (values) => {
     console.log("Received values of form: ", values);
 
     if (values.username === name && values.password === password) {
       console.log("Logged successfully!");
+      setErr("");
       navigate("/admin");
     } else {
-      alert("Invalid Username or Password");
+      setErr("Invalid Username or Password");
     }
   };
   return (
@@ -47,6 +50,15 @@ const SignIn = () => {
           onFinish={onFinish}
         >
           <h1 style={{ textAlign: "center" }}>SIgnIn Page</h1>
+          {err && (
+            <Form.Item>
+              <div
+                style={{ color: "red", fontSize: "14px", marginBottom: "8px" }}
+              >
+                {err}
+              </div>
+            </Form.Item>
+          )}
           <Form.Item
             name="username"
             rules={[{ required: true, message: "Please input your Username!" }]}

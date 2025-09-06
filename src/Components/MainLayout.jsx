@@ -6,9 +6,10 @@ import {
   TableOutlined,
   UploadOutlined,
 } from "@ant-design/icons";
-import { Button, Layout, Menu, theme } from "antd";
+import { Button, Layout, Menu, Switch, theme as antdTheme } from "antd";
 import Dashboard from "./Dashboard";
 import TableComponent from "./TableComponent";
+import useThemeStore from "./themeStore";
 
 
 const { Header, Sider, Content, Footer } = Layout;
@@ -17,9 +18,11 @@ const MainLayout = () => {
   const [collapsed, setCollapsed] = useState(false);
   const [activeSection, setActiveSection] = useState("1");
 
+
+  const {theme, setTheme}= useThemeStore();
   const {
     token: { colorBgContainer, borderRadiusLG },
-  } = theme.useToken();
+  } = antdTheme.useToken();
 
   const renderSection = () => {
     switch (activeSection) {
@@ -70,7 +73,7 @@ const MainLayout = () => {
           Logo
         </div>
         <Menu
-          theme="dark"
+          theme={theme}
           mode="inline"
           selectedKeys={[activeSection]}
           onClick={({ key }) => setActiveSection(key)}
@@ -109,6 +112,13 @@ const MainLayout = () => {
             }}
           />
           Header
+          {/* Theme Switch */}
+          <Switch
+            checked={theme === "dark"}
+            onChange={setTheme}
+            checkedChildren="🌙"
+            unCheckedChildren="🌞"
+          />
         </Header>
 
         <Content

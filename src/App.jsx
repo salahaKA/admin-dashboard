@@ -3,11 +3,15 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import SignUp from './Components/SignUp'
 import SignIn from './Components/SignIn'
 import MainLayout from './Components/MainLayout'
+import useThemeStore from './Components/themeStore'
+import { ConfigProvider, theme as antdtheme} from 'antd'
 
 
 const App = () => {
+
+  const {theme} = useThemeStore();
   return (
-    <div>
+    <ConfigProvider theme= {{ algorithm: theme=== "dark"? antdtheme.darkAlgorithm: antdtheme.defaultAlgorithm,}}>
       <BrowserRouter>
         <Routes>
           <Route path='/' element={<SignUp/>}></Route>
@@ -16,7 +20,7 @@ const App = () => {
           <Route path='/admin' element={<MainLayout/>}></Route>
         </Routes>
       </BrowserRouter>
-    </div>
+    </ConfigProvider>
   )
 }
 
