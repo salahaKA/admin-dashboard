@@ -10,6 +10,7 @@ import { Button, Layout, Menu, Switch, theme as antdTheme } from "antd";
 import Dashboard from "./Dashboard";
 import TableComponent from "./TableComponent";
 import useThemeStore from "./themeStore";
+import StudentTable from "./StudentTable/StudentTable";
 
 
 const { Header, Sider, Content, Footer } = Layout;
@@ -45,6 +46,13 @@ const MainLayout = () => {
           <div>
             <h2>Nav 3</h2>
             <p>This is Nav 3 content.</p>
+          </div>
+        );
+        case "4":
+        return (
+          <div>
+            <StudentTable/>
+            
           </div>
         );
       default:
@@ -92,6 +100,11 @@ const MainLayout = () => {
               key: "3",
               icon: <UploadOutlined />,
               label: "Nav 3",
+            },
+            {
+              key: "4",
+              icon: <TableOutlined />,
+              label: "Student Table",
             },
           ]}
         />
