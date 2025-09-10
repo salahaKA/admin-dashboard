@@ -1,5 +1,5 @@
 import { DeleteOutlined, EditOutlined, PlusOutlined } from "@ant-design/icons";
-import { Button, Checkbox, Radio, Space, Table } from "antd";
+import { Button, Checkbox, Modal, Radio, Space, Table } from "antd";
 import React, { useState } from "react";
 import StudentForm from "./AddStudent";
 
@@ -100,6 +100,8 @@ const StudentTable = () => {
   ]);
 
   const [showForm, setShowForm] = useState();
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [selectedRecord, setSelectedRecord] = useState(null);
 
   const handleAdd= (values)=>{
     const newRecord = {
@@ -110,9 +112,27 @@ const StudentTable = () => {
     setShowForm(false)
   }
 
-  const handleDelete = (key) => {
-    setDataSource(dataSource.filter((item) => item.key !== key));
+  const handleDelete = (record) => {
+    setSelectedRecord(record);
+    setIsModalVisible(true);
   };
+
+  const handleOk = () => {
+    if (selectedRecord) {
+      setDataSource(dataSource.filter((item) => item.key !== selectedRecord.key));
+    }
+    setIsModalVisible(false);
+    setSelectedRecord(null);
+  };
+
+  const handleCancelModal = () => {
+    setIsModalVisible(false);
+    setSelectedRecord(null);
+  };
+
+  // const handleDelete = (key) => {
+  //   setDataSource(dataSource.filter((item) => item.key !== key));
+  // };
 
   const handleEdit = (record) => {
     console.log("Edit student:", record);
@@ -168,7 +188,7 @@ const StudentTable = () => {
             icon={<DeleteOutlined />}
             type="primary"
             danger
-            onClick={() => handleDelete(record.key)}
+            onClick={() => handleDelete(record)}
           >
             Delete
           </Button>
@@ -188,6 +208,23 @@ const StudentTable = () => {
             ADD
           </Button>
           <Table dataSource={dataSource} columns={columns} />
+
+          {/* Delete Confirmation Modal */}
+          <Modal
+            title="Confirm Delete"
+            open={isModalVisible}
+            onOk={handleOk}
+            onCancel={handleCancelModal}
+            okText="Yes, Delete"
+            cancelText="Cancel"
+            centered
+          >
+            <p>
+              Are you sure you want to delete{" "}
+              <b>{selectedRecord?.name}</b>?
+            </p>
+          </Modal>
+        
         </>
       ) : (
         <StudentForm onSubmit={handleAdd} onCancel={() => setShowForm(false)} />
