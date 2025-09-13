@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import {
   DashboardOutlined,
+  FundViewOutlined,
   MenuFoldOutlined,
   MenuUnfoldOutlined,
   TableOutlined,
@@ -11,6 +12,8 @@ import Dashboard from "./Dashboard";
 import TableComponent from "./TableComponent";
 import useThemeStore from "./themeStore";
 import StudentTable from "./StudentTable/StudentTable";
+import CardsComponent from "./FakerDataDisplay/CardsComponent";
+
 
 
 const { Header, Sider, Content, Footer } = Layout;
@@ -52,6 +55,13 @@ const MainLayout = () => {
         return (
           <div>
             <StudentTable/>
+            
+          </div>
+        );
+        case "5":
+        return (
+          <div>
+            <CardsComponent/>
             
           </div>
         );
@@ -106,6 +116,11 @@ const MainLayout = () => {
               icon: <TableOutlined />,
               label: "Student Table",
             },
+            {
+              key: "5",
+              icon: <FundViewOutlined />,
+              label: "Cards",
+            },
           ]}
         />
       </Sider>
@@ -141,6 +156,7 @@ const MainLayout = () => {
             minHeight: "80vh",
             background: colorBgContainer,
             borderRadius: borderRadiusLG,
+            // overflowY: "auto",
           }}
         >
           {renderSection()}

@@ -15,6 +15,7 @@ const StudentTable = () => {
       batch: "Batch 1",
       gender: "Female",
       isCheck: "true",
+      image: "https://via.placeholder.com/50"
     },
     {
       key: 2,
@@ -24,6 +25,7 @@ const StudentTable = () => {
       batch: "Batch 2",
       gender: "Male",
       isCheck: "true",
+      image: "https://via.placeholder.com/50"
     },
     {
       key: 3,
@@ -33,6 +35,7 @@ const StudentTable = () => {
       batch: "Batch 3",
       gender: "Female",
       isCheck: "true",
+      image: "https://via.placeholder.com/50"
     },
     {
       key: 4,
@@ -42,6 +45,7 @@ const StudentTable = () => {
       batch: "Batch 1",
       gender: "Male",
       isCheck: "true",
+      image: "https://via.placeholder.com/50"
     },
     {
       key: 5,
@@ -51,6 +55,7 @@ const StudentTable = () => {
       batch: "Batch 2",
       gender: "Female",
       isCheck: "true",
+      image: "https://via.placeholder.com/50"
     },
     {
       key: 6,
@@ -60,6 +65,7 @@ const StudentTable = () => {
       batch: "Batch 3",
       gender: "Male",
       isCheck: "false",
+      image: "https://via.placeholder.com/50"
     },
     {
       key: 7,
@@ -69,6 +75,7 @@ const StudentTable = () => {
       batch: "Batch 1",
       gender: "Female",
       isCheck: "true",
+      image: "https://via.placeholder.com/50"
     },
     {
       key: 8,
@@ -78,6 +85,7 @@ const StudentTable = () => {
       batch: "Batch 2",
       gender: "Male",
       isCheck: "false",
+      image: "https://via.placeholder.com/50"
     },
     {
       key: 9,
@@ -87,6 +95,7 @@ const StudentTable = () => {
       batch: "Batch 3",
       gender: "Female",
       isCheck: "true",
+      image: "https://via.placeholder.com/50"
     },
     {
       key: 10,
@@ -96,6 +105,7 @@ const StudentTable = () => {
       batch: "Batch 1",
       gender: "Male",
       isCheck: "false",
+      image: "https://via.placeholder.com/50"
     },
   ]);
 
@@ -171,6 +181,12 @@ const StudentTable = () => {
       dataIndex: "isCheck",
       key: "isCheck",
       // render: (isCheck) => <Checkbox checked={isCheck} disabled />,
+    },
+    {
+      title:"Image",
+      dataIndex:"image",
+      key:"image",
+      render: (img)=> img? (<img src={img} alt="student" style={{ width: 50,height: 50, borderRadius:"50%"}}/>): ("No Image")
     },
     {
       title: "Action",

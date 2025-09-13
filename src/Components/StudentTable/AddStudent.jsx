@@ -8,10 +8,22 @@ import {
   Checkbox,
   Button,
   Space,
+  Upload,
 } from "antd";
+import { UploadOutlined } from "@ant-design/icons";
 
-const AddStudent = ({ onFinish, onCancel }) => {
+const AddStudent = ({  onCancel }) => {
   const [form] = Form.useForm();
+
+  const onFinish= (values)=>{
+    if (values.image && values.image.fileList.length > 0) {
+      values.image = URL.createObjectURL(values.image.file.originFileObj);
+    } else {
+      values.image = null;
+    }
+    onSubmit(values);
+    form.resetFields();
+  }
 
   return (
     <div style={{ padding: 20, border: "1px solid #ddd", borderRadius: 10 }}>
@@ -46,6 +58,18 @@ const AddStudent = ({ onFinish, onCancel }) => {
 
         <Form.Item name="isCheck" valuePropName="checked">
           <Checkbox>Checked</Checkbox>
+        </Form.Item>
+
+        <Form.Item name= "image" label="Upload Image" valuePropName="fileList">
+          <Upload action="/upload.do" listType="picture-card">
+            <button
+            icon={<UploadOutlined/>}
+              style={{ color: 'inherit', cursor: 'inherit', border: 0, background: 'none' }}
+              type="button"
+            >
+              CLICK TO UPLOAD
+            </button>
+          </Upload>
         </Form.Item>
 
         <Space>
