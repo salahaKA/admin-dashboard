@@ -11,6 +11,7 @@ import {
   Upload,
 } from "antd";
 import { UploadOutlined } from "@ant-design/icons";
+import TextArea from "antd/es/input/TextArea";
 
 const AddStudent = ({  onCancel }) => {
   const [form] = Form.useForm();
@@ -29,16 +30,16 @@ const AddStudent = ({  onCancel }) => {
     <div style={{ padding: 20, border: "1px solid #ddd", borderRadius: 10 }}>
       <h1>Add Student</h1>
       <Form form={form} layout="vertical" onFinish={onFinish}>
-        <Form.Item name="name" label="Name" rules={[{ required: true }]}>
-          <Input />
+        <Form.Item name="name" label="Name" rules={[{ required: true }]} tooltip="Enter name to add">
+          <Input maxLength={6} variant="underlined"/>
         </Form.Item>
 
         <Form.Item name="age" label="Age" rules={[{ required: true }]}>
-          <InputNumber min={18} max={30} style={{ width: "100%" }} />
+          <InputNumber min={18} max={50} style={{ width: "100%" }} />
         </Form.Item>
 
         <Form.Item name="address" label="Address" rules={[{ required: true }]}>
-          <Input />
+          <TextArea allowClear rows={10}/>
         </Form.Item>
 
         <Form.Item name="batch" label="Batch" rules={[{ required: true }]}>
@@ -61,10 +62,10 @@ const AddStudent = ({  onCancel }) => {
         </Form.Item>
 
         <Form.Item name= "image" label="Upload Image" valuePropName="fileList">
-          <Upload action="/upload.do" listType="picture-card">
+          <Upload action="/upload.do" listType="picture-circle">
             <button
             icon={<UploadOutlined/>}
-              style={{ color: 'inherit', cursor: 'inherit', border: 0, background: 'none' }}
+              style={{ color: 'inherit', cursor: 'pointer', border: 0, background: 'none' }}
               type="button"
             >
               CLICK TO UPLOAD

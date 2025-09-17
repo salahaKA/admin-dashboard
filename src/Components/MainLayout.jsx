@@ -4,6 +4,7 @@ import {
   FundViewOutlined,
   MenuFoldOutlined,
   MenuUnfoldOutlined,
+  SearchOutlined,
   TableOutlined,
   UploadOutlined,
 } from "@ant-design/icons";
@@ -13,6 +14,8 @@ import TableComponent from "./TableComponent";
 import useThemeStore from "./themeStore";
 import StudentTable from "./StudentTable/StudentTable";
 import CardsComponent from "./FakerDataDisplay/CardsComponent";
+import Option1 from "./Basic/Option1";
+import Basic2 from "./Basic/Basic2";
 
 
 
@@ -65,6 +68,28 @@ const MainLayout = () => {
             
           </div>
         );
+        case "611":
+        return (
+          <div>
+            <Option1/>
+            
+          </div>
+        );
+        case "62":
+        return (
+          <div>
+            <Basic2/>
+            
+          </div>
+        );
+
+        // case "611":
+        // return (
+        //   <div>
+        //     <Option1/>
+            
+        //   </div>
+        // );
       default:
         return <p>Select a menu item</p>;
     }
@@ -121,6 +146,37 @@ const MainLayout = () => {
               icon: <FundViewOutlined />,
               label: "Cards",
             },
+            {
+              key: "6",
+              icon: <FundViewOutlined />,
+              label: "Basic",
+              children: [
+                {
+                  key: "61",
+                  label:"Basic1",
+                  children:[
+                    {
+                      key:"611",
+                      label: "option1"
+                    },
+                    {
+                      key:"612",
+                      label: "option2"
+                    },
+                    {
+                      key:"613",
+                      label: "option3"
+                    }
+                  ]
+                },
+                {
+                  key:"62",
+                  label:"Basic2"
+                }
+
+              ]
+            },
+            
           ]}
         />
       </Sider>
