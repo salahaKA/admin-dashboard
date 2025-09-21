@@ -2,6 +2,7 @@ import React from 'react';
 import { Tabs } from 'antd';
 import Tab1 from './Tab1';
 import Tab2 from './Tab2';
+import Tab3 from './Tab3';
 
 const onChange = key => {
   console.log(key);
@@ -20,7 +21,7 @@ const items = [
   {
     key: '3',
     label: 'Tab 3',
-    children: 'Content of Tab Pane 3',
+    children: <Tab3/>,
   },
 ];
 const TabsComponent = () => <Tabs defaultActiveKey="1" items={items} onChange={onChange} />;
