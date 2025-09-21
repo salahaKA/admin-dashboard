@@ -1,19 +1,20 @@
 import React, { useEffect, useState } from "react";
-import { Table,  Skeleton, Input, InputNumber, Button, Space } from "antd";
+import { Table, Skeleton, Input, InputNumber, Button, Space } from "antd";
 import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
 
-
 const Tab3 = () => {
-  
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
 
-
   // state for filters
-   const [titleInput, setTitleInput] = useState("");
+  const [titleInput, setTitleInput] = useState("");
   const [minInput, setMinInput] = useState(null);
   const [maxInput, setMaxInput] = useState(null);
+
+  // state for adding new product
+  const [newTitle, setNewTitle] = useState("");
+  const [newPrice, setNewPrice] = useState(null);
 
   const columns = [
     { title: "ID", dataIndex: "id", key: "id" },
@@ -21,12 +22,11 @@ const Tab3 = () => {
     { title: "Price ($)", dataIndex: "price", key: "price" },
   ];
 
-   const [filters, setFilters] = useState({
+  const [filters, setFilters] = useState({
     title: "",
     minPrice: null,
     maxPrice: null,
   });
-
 
   // fetch data when component loads
   useEffect(() => {
@@ -44,15 +44,18 @@ const Tab3 = () => {
     fetchData();
   }, []);
 
-
   // filter data only when filters are applied
   const filteredData = data.filter((item) => {
     const matchTitle = item.title
       .toLowerCase()
       .includes(filters.title.toLowerCase());
 
-    const matchMinPrice = filters.minPrice ? item.price >= filters.minPrice : true;
-    const matchMaxPrice = filters.maxPrice ? item.price <= filters.maxPrice : true;
+    const matchMinPrice = filters.minPrice
+      ? item.price >= filters.minPrice
+      : true;
+    const matchMaxPrice = filters.maxPrice
+      ? item.price <= filters.maxPrice
+      : true;
 
     return matchTitle && matchMinPrice && matchMaxPrice;
   });
@@ -64,10 +67,9 @@ const Tab3 = () => {
       minPrice: minInput,
       maxPrice: maxInput,
     });
-    toast.success('Successfully filtered!')
+    toast.success("Successfully filtered!");
   };
 
-  
   const resetFilters = () => {
     setTitleInput("");
     setMinInput(null);
@@ -75,13 +77,37 @@ const Tab3 = () => {
     setFilters({ title: "", minPrice: null, maxPrice: null });
   };
 
-
+  // add new product
+  const addProduct = async () => {
+    if (!newTitle || !newPrice) {
+      toast.error("Please enter product title and price");
+      return;
+    }
+    try {
+      const res = await axios.post("https://dummyjson.com/products/add", {
+        title: newTitle,
+        price: newPrice,
+      });
+      // update state so new product shows in table
+      setData([res.data, ...data]);
+      toast.success("Product added successfully!");
+      // reset inputs
+      setNewTitle("");
+      setNewPrice(null);
+    } catch (error) {
+      console.error("Error adding product:", error);
+      toast.error("Failed to add product");
+    }
+  };
+  
   return (
     <div style={{ padding: 20 }}>
-        <div><Toaster/></div>
-        <h2>Products Table with Filters</h2>
+      <div>
+        <Toaster />
+      </div>
+      <h2>Products Table with Filters</h2>
 
-        {/* Filters Section */}
+      {/* Filters Section */}
       <Space style={{ marginBottom: 16 }}>
         <Input
           placeholder="Search by Title"
@@ -104,6 +130,26 @@ const Tab3 = () => {
         </Button>
         <Button onClick={resetFilters}>Reset</Button>
       </Space>
+
+      {/* Add Product Section */}
+      <h3>Add New Product</h3>
+      <Space style={{ marginBottom: 16 }}>
+        <Input
+          placeholder="Product Title"
+          value={newTitle}
+          onChange={(e) => setNewTitle(e.target.value)}
+          style={{ width: 200 }}
+        />
+        <InputNumber
+          placeholder="Price"
+          value={newPrice}
+          onChange={setNewPrice}
+        />
+        <Button type="dashed" onClick={addProduct}>
+          Add Product
+        </Button>
+      </Space>
+
       <h2>Products Table</h2>
       {loading ? (
         <Skeleton size="large" />
