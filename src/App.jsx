@@ -22,6 +22,7 @@ const App = () => {
           {/* <Route path='/calculator' element={<Calculator/>}></Route> */}
           {/* <Route path='/calculator2' element={<Calculator2/>}></Route> */}
           <Route path='/c3' element={<Calculator3/>}></Route>
+          
         </Routes>
       </BrowserRouter>
     </ConfigProvider>

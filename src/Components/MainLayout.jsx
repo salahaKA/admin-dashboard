@@ -16,6 +16,7 @@ import StudentTable from "./StudentTable/StudentTable";
 import CardsComponent from "./FakerDataDisplay/CardsComponent";
 import Option1 from "./Basic/Option1";
 import Basic2 from "./Basic/Basic2";
+import TabsComponent from "./Tabs/TabsComponent";
 
 
 
@@ -80,6 +81,12 @@ const MainLayout = () => {
           <div>
             <Basic2/>
             
+          </div>
+        );
+        case "7":
+        return (
+          <div>
+            <TabsComponent/>
           </div>
         );
 
@@ -176,7 +183,11 @@ const MainLayout = () => {
 
               ]
             },
-            
+            {
+              key: "7",
+              icon: <FundViewOutlined />,
+              label: "Tabs",
+            },
           ]}
         />
       </Sider>
