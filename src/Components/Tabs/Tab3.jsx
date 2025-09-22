@@ -1,7 +1,18 @@
 import React, { useEffect, useState } from "react";
-import { Table, Skeleton, Input, InputNumber, Button, Space } from "antd";
+import {
+  Table,
+  Skeleton,
+  Input,
+  InputNumber,
+  Button,
+  Space,
+  BackTop,
+  Select,
+} from "antd";
 import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
+
+import Papa from "papaparse";
 
 const Tab3 = () => {
   const [data, setData] = useState([]);
@@ -99,7 +110,32 @@ const Tab3 = () => {
       toast.error("Failed to add product");
     }
   };
-  
+
+  // Export table data to CSV
+  const handleExport = () => {
+    if (!filteredData || filteredData.length === 0) {
+      toast.error("No data to export");
+      return;
+    }
+    const headers = columns.map((col) => col.title);
+    const keys = columns.map((col) => col.dataIndex);
+    const csvData = filteredData.map((row) => keys.map((key) => row[key]));
+
+    const csv = Papa.unparse({
+      fields: headers,
+      data: csvData,
+    });
+    const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.href = url;
+    link.setAttribute("download", "products.csv");
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    toast.success("Exported successfully!");
+  };
+
   return (
     <div style={{ padding: 20 }}>
       <div>
@@ -109,12 +145,31 @@ const Tab3 = () => {
 
       {/* Filters Section */}
       <Space style={{ marginBottom: 16 }}>
-        <Input
+        {/* <Input
           placeholder="Search by Title"
           value={titleInput}
           onChange={(e) => setTitleInput(e.target.value)}
           style={{ width: 200 }}
-        />
+        /> */}
+        <Select
+          showSearch
+          placeholder="Select Title"
+          value={titleInput}
+          onChange={(value) => setTitleInput(value)}
+          style={{ width: 200 }}
+          optionFilterProp="children"
+          filterOption={(input, option) =>
+            option.children.toLowerCase().includes(input.toLowerCase())
+          }
+          // make dropdown scrollable if many options
+          dropdownStyle={{ maxHeight: 200, overflowY: "auto" }}
+        >
+          {data.map((item) => (
+            <Select.Option key={item.id} value={item.title}>
+              {item.title}
+            </Select.Option>
+          ))}
+        </Select>
         <InputNumber
           placeholder="Min Price"
           value={minInput}
@@ -154,12 +209,49 @@ const Tab3 = () => {
       {loading ? (
         <Skeleton size="large" />
       ) : (
-        <Table
-          columns={columns}
-          dataSource={filteredData}
-          rowKey="id" // tells table to use 'id' as unique key
-          bordered
-        />
+        <div>
+          <Button
+            type="primary"
+            onClick={handleExport}
+            style={{ marginBottom: 16 }}
+          >
+            Export CSV
+          </Button>
+          <Table
+            columns={columns}
+            dataSource={filteredData}
+            rowKey="id"
+            bordered
+            scroll={{ x: 50, y: 200 }}
+            pagination={{
+              pageSize: 5,
+              showSizeChanger: true,
+              showQuickJumper: true,
+            }}
+          />
+          <BackTop
+            target={() => document.querySelector(".ant-table-body")}
+            style={{ right: 40 }}
+          >
+            <div
+              style={{
+                height: 40,
+                width: 40,
+                backgroundColor: "#1677ff",
+                color: "#fff",
+                textAlign: "center",
+                lineHeight: "40px",
+                borderRadius: "50%",
+                position: "absolute",
+                right: 10,
+                bottom: 80,
+                cursor: "pointer",
+              }}
+            >
+              ↑
+            </div>
+          </BackTop>
+        </div>
       )}
     </div>
   );
