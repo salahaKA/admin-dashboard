@@ -17,6 +17,9 @@ import CardsComponent from "./FakerDataDisplay/CardsComponent";
 import Option1 from "./Basic/Option1";
 import Basic2 from "./Basic/Basic2";
 import TabsComponent from "./Tabs/TabsComponent";
+import EmployeeForm from "./CommonForm/EmployeeForm";
+import EmployeeTable from "./CommonForm/EmployeeTable";
+
 
 
 
@@ -87,6 +90,18 @@ const MainLayout = () => {
         return (
           <div>
             <TabsComponent/>
+          </div>
+        );
+        case "8":
+        return (
+          <div>
+            <EmployeeForm/>
+          </div>
+        );
+        case "9":
+        return (
+          <div>
+            <EmployeeTable/>
           </div>
         );
 
@@ -187,6 +202,16 @@ const MainLayout = () => {
               key: "7",
               icon: <FundViewOutlined />,
               label: "Tabs",
+            },
+            {
+              key: "8",
+              icon: <FundViewOutlined />,
+              label: "EMP Form",
+            },
+            {
+              key: "9",
+              icon: <FundViewOutlined />,
+              label: "EMP table",
             },
           ]}
         />
