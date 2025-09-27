@@ -19,6 +19,9 @@ import Basic2 from "./Basic/Basic2";
 import TabsComponent from "./Tabs/TabsComponent";
 import EmployeeForm from "./CommonForm/EmployeeForm";
 import EmployeeTable from "./CommonForm/EmployeeTable";
+import EmpForm from "./EmployeeManagement/EmpComponents/EmpForm";
+import EmpTable from "./EmployeeManagement/EmpComponents/EmpTable";
+import ViewEmp from "./EmployeeManagement/EmpComponents/ViewEmp";
 
 
 
@@ -104,6 +107,26 @@ const MainLayout = () => {
             <EmployeeTable/>
           </div>
         );
+
+        case "empForm":
+        return (
+          <div>
+            <EmpForm/>
+          </div>
+        );
+        case "empView":
+        return (
+          <div>
+            <ViewEmp/>
+          </div>
+        );
+        case "empTable":
+        return (
+          <div>
+            <EmpTable/>
+          </div>
+        );
+        
 
         // case "611":
         // return (
@@ -212,6 +235,22 @@ const MainLayout = () => {
               key: "9",
               icon: <FundViewOutlined />,
               label: "EMP table",
+            },
+
+            {
+              key: "10",
+              icon: <FundViewOutlined />,
+              label: "EMP Management",
+              children:[{
+                key: "empForm",
+              label: "EMPLOYEE Form",
+              },{
+                key: "empTable",
+              label: "EMPLOYEE TABLE",
+              }, {
+                key: "empView",
+              label: "EMPLOYEE View",
+              }]
             },
           ]}
         />
