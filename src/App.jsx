@@ -9,6 +9,7 @@ import Calculator from "./Components/Calculator";
 import Calculator3 from "./Components/Calculator+Redux/Calculator3";
 import EmpTable from "./Components/EmployeeManagement/EmpComponents/EmpTable";
 import ViewEmp from "./Components/EmployeeManagement/EmpComponents/ViewEmp";
+import EmpForm from "./Components/EmployeeManagement/EmpComponents/EmpForm";
 
 const App = () => {
   const { theme } = useThemeStore();
@@ -32,6 +33,7 @@ const App = () => {
           <Route path="/c3" element={<Calculator3 />}></Route>
 
           {/* Employee Management system */}
+          <Route path="/empForm/:id?" element={<EmpForm/>}/>
           <Route path="/employees" element={<EmpTable />} />
           <Route path="/employees/:id" element={<ViewEmp />} />
         </Routes>

@@ -1,6 +1,6 @@
 import React from "react";
 import useEmpStore from "../Store/EmployeeStore";
-import { Table } from "antd";
+import { Button, Table } from "antd";
 import { useNavigate } from "react-router-dom";
 
 const EmpTable = () => {
@@ -36,11 +36,14 @@ const EmpTable = () => {
 
   return (
     <div>
+      <Button onClick={()=> navigate('/empForm')}>CREATE</Button>
       <Table
+      rowKey="empId"  
         dataSource={empData}
         columns={columns}
         pagination={{ pageSize: 5 }}
         bordered
+        
         scroll={{ y: 300 }}
         onRow={(record) => ({
           onClick: () => navigate(`/employees/${record.empId}`), 
