@@ -7,10 +7,12 @@ import FormButtons from "../../../utils/Buttons";
 import FormTypograpy from "../../../utils/Typograpy";
 import useEmpStore from "../Store/EmployeeStore";
 import dayjs from "dayjs";
+import { useNavigate } from "react-router-dom";
 
 const EmpForm = () => {
   const [form] = Form.useForm();
   const { empData, empAdd } = useEmpStore();
+  const navigate = useNavigate()
 
   const onFinish = (values) => {
     // convert date to DD/MM/YYYY formate
@@ -22,6 +24,7 @@ const EmpForm = () => {
     empAdd(formattedValues);
     console.log(empData);
     form.resetFields();
+    navigate('/employees')
 
     // fetcing data from local storage
     const storedData = JSON.parse(localStorage.getItem("emp-storage"));
