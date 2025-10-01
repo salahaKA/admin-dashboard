@@ -1,10 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Select } from "antd";
 
 
 const { Option } = Select;
 
 const StudentObjForm = () => {
+
+  const nameInputRef=useRef();
+
   const [student, setStudent] = useState({
     name: "",
     age: "",
@@ -16,10 +19,17 @@ const StudentObjForm = () => {
   const [submitted, setSubmitted] = useState(null);
 
   useEffect(() => {
-  if (submitted) {
-    localStorage.setItem("studentData", JSON.stringify(submitted));
+  if (student) {
+    localStorage.setItem("studentData", JSON.stringify(student));
   }
-}, [submitted]);
+}, [student]);
+
+useEffect(() => {
+    nameInputRef.current.focus(); // 👈 Automatically focus on load
+  }, []);
+
+
+
 
 
   const handleChange = (e) => {
@@ -43,6 +53,11 @@ const StudentObjForm = () => {
     console.log("Form submitted successfully!", student);
   };
 
+  const handleReset = () => {
+  setStudent({ name: "", age: "", course: "", gender: "" });
+  nameInputRef.current.focus(); // 👈 Focus again after reset
+};
+
   return (
     <div>
       <h2>StudentObjForm</h2>
@@ -54,6 +69,7 @@ const StudentObjForm = () => {
           name="name"
           value={student.name}
           onChange={handleChange}
+          ref={nameInputRef}
         />
         <br />
 
@@ -107,6 +123,7 @@ const StudentObjForm = () => {
         <br />
 
         <button type="submit">SUBMIT</button>
+        <button onClick={handleReset}>RESET</button>
       </form>
 
       {/* Show submitted data */}
