@@ -10,6 +10,7 @@ import Calculator3 from "./Components/Calculator+Redux/Calculator3";
 import EmpTable from "./Components/EmployeeManagement/EmpComponents/EmpTable";
 import ViewEmp from "./Components/EmployeeManagement/EmpComponents/ViewEmp";
 import EmpForm from "./Components/EmployeeManagement/EmpComponents/EmpForm";
+import StudentObjForm from "./Components/NormalObjectForm/StudentObjForm";
 
 const App = () => {
   const { theme } = useThemeStore();
@@ -36,6 +37,11 @@ const App = () => {
           <Route path="/empForm/:id?" element={<EmpForm/>}/>
           <Route path="/employees" element={<EmpTable />} />
           <Route path="/employees/:id" element={<ViewEmp />} />
+
+
+
+          {/* Basic form, state management */}
+          <Route path="/studObjForm" element={<StudentObjForm/>}/>
         </Routes>
       </BrowserRouter>
     </ConfigProvider>
