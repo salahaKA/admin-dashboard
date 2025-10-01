@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Select } from "antd";
+
 
 const { Option } = Select;
 
@@ -13,6 +14,13 @@ const StudentObjForm = () => {
 
   const courseList = ["MCA", "Btech", "BCA", "Mtech"];
   const [submitted, setSubmitted] = useState(null);
+
+  useEffect(() => {
+  if (submitted) {
+    localStorage.setItem("studentData", JSON.stringify(submitted));
+  }
+}, [submitted]);
+
 
   const handleChange = (e) => {
     const { name, value } = e.target;
