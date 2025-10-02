@@ -1,12 +1,10 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Select } from "antd";
 
-
 const { Option } = Select;
 
 const StudentObjForm = () => {
-
-  const nameInputRef=useRef();
+  const nameInputRef = useRef();
 
   const [student, setStudent] = useState({
     name: "",
@@ -19,18 +17,14 @@ const StudentObjForm = () => {
   const [submitted, setSubmitted] = useState(null);
 
   useEffect(() => {
-  if (student) {
-    localStorage.setItem("studentData", JSON.stringify(student));
-  }
-}, [student]);
+    if (student) {
+      localStorage.setItem("studentData", JSON.stringify(student));
+    }
+  }, [student]);
 
-useEffect(() => {
+  useEffect(() => {
     nameInputRef.current.focus(); // 👈 Automatically focus on load
   }, []);
-
-
-
-
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -54,9 +48,9 @@ useEffect(() => {
   };
 
   const handleReset = () => {
-  setStudent({ name: "", age: "", course: "", gender: "" });
-  nameInputRef.current.focus(); // 👈 Focus again after reset
-};
+    setStudent({ name: "", age: "", course: "", gender: "" });
+    nameInputRef.current.focus(); // 👈 Focus again after reset
+  };
 
   return (
     <div>
@@ -72,8 +66,6 @@ useEffect(() => {
           ref={nameInputRef}
         />
         <br />
-
-        
         <label>Age:</label>
         <br />
         <input
@@ -83,8 +75,6 @@ useEffect(() => {
           onChange={handleChange}
         />
         <br />
-
-        
         <label>Course:</label>
         <br />
         <Select
@@ -100,8 +90,6 @@ useEffect(() => {
           ))}
         </Select>
         <br />
-
-        
         <label>Gender:</label>
         <br />
         <input
@@ -121,7 +109,6 @@ useEffect(() => {
         />{" "}
         Female
         <br />
-
         <button type="submit">SUBMIT</button>
         <button onClick={handleReset}>RESET</button>
       </form>
@@ -130,10 +117,18 @@ useEffect(() => {
       {submitted && (
         <div style={{ marginTop: "20px" }}>
           <h3>Submitted Data:</h3>
-          <p><strong>Name:</strong> {submitted.name}</p>
-          <p><strong>Age:</strong> {submitted.age}</p>
-          <p><strong>Course:</strong> {submitted.course}</p>
-          <p><strong>Gender:</strong> {submitted.gender}</p>
+          <p>
+            <strong>Name:</strong> {submitted.name}
+          </p>
+          <p>
+            <strong>Age:</strong> {submitted.age}
+          </p>
+          <p>
+            <strong>Course:</strong> {submitted.course}
+          </p>
+          <p>
+            <strong>Gender:</strong> {submitted.gender}
+          </p>
         </div>
       )}
     </div>
