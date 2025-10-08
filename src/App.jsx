@@ -11,6 +11,8 @@ import EmpTable from "./Components/EmployeeManagement/EmpComponents/EmpTable";
 import ViewEmp from "./Components/EmployeeManagement/EmpComponents/ViewEmp";
 import EmpForm from "./Components/EmployeeManagement/EmpComponents/EmpForm";
 import StudentObjForm from "./Components/NormalObjectForm/StudentObjForm";
+import Table1 from "./Components/Basic/TableSpan/Table1";
+import TableView from "./Components/Basic/TableSpan/TableView";
 
 const App = () => {
   const { theme } = useThemeStore();
@@ -38,10 +40,15 @@ const App = () => {
           <Route path="/employees" element={<EmpTable />} />
           <Route path="/employees/:id" element={<ViewEmp />} />
 
+          {/* Cell span and table span */}
+          <Route path="/tableSpan" element={<Table1/>}/>
+
 
 
           {/* Basic form, state management */}
           <Route path="/studObjForm" element={<StudentObjForm/>}/>
+          <Route path="/tableView" element={<TableView/>}/>
+           <Route path="/tableView/:id" element={<TableView/>}/>
         </Routes>
       </BrowserRouter>
     </ConfigProvider>

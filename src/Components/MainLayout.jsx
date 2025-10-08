@@ -22,9 +22,7 @@ import EmployeeTable from "./CommonForm/EmployeeTable";
 import EmpForm from "./EmployeeManagement/EmpComponents/EmpForm";
 import EmpTable from "./EmployeeManagement/EmpComponents/EmpTable";
 import ViewEmp from "./EmployeeManagement/EmpComponents/ViewEmp";
-
-
-
+import Table1 from "./Basic/TableSpan/Table1";
 
 const { Header, Sider, Content, Footer } = Layout;
 
@@ -32,8 +30,7 @@ const MainLayout = () => {
   const [collapsed, setCollapsed] = useState(false);
   const [activeSection, setActiveSection] = useState("1");
 
-
-  const {theme, setTheme}= useThemeStore();
+  const { theme, setTheme } = useThemeStore();
   const {
     token: { colorBgContainer, borderRadiusLG },
   } = antdTheme.useToken();
@@ -43,14 +40,14 @@ const MainLayout = () => {
       case "1":
         return (
           <div>
-            <Dashboard/>
+            <Dashboard />
             <p>This is the Dashboard content.</p>
           </div>
         );
       case "2":
         return (
           <div>
-            <TableComponent/>
+            <TableComponent />
             <p>This is the View content.</p>
           </div>
         );
@@ -61,80 +58,82 @@ const MainLayout = () => {
             <p>This is Nav 3 content.</p>
           </div>
         );
-        case "4":
+      case "4":
         return (
           <div>
-            <StudentTable/>
-            
+            <StudentTable />
           </div>
         );
-        case "5":
+      case "5":
         return (
           <div>
-            <CardsComponent/>
-            
+            <CardsComponent />
           </div>
         );
-        case "611":
+      case "611":
         return (
           <div>
-            <Option1/>
-            
+            <Option1 />
           </div>
         );
-        case "62":
+      case "62":
         return (
           <div>
-            <Basic2/>
-            
+            <Basic2 />
           </div>
         );
-        case "7":
+      case "7":
         return (
           <div>
-            <TabsComponent/>
+            <TabsComponent />
           </div>
         );
-        case "8":
+      case "8":
         return (
           <div>
-            <EmployeeForm/>
+            <EmployeeForm />
           </div>
         );
-        case "9":
+      case "9":
         return (
           <div>
-            <EmployeeTable/>
+            <EmployeeTable />
           </div>
         );
 
-        case "empForm":
+      case "empForm":
         return (
           <div>
-            <EmpForm/>
+            <EmpForm />
           </div>
         );
-        case "empView":
+      case "empView":
         return (
           <div>
-            <ViewEmp/>
+            <ViewEmp />
           </div>
         );
-        case "empTable":
+      case "empTable":
         return (
           <div>
-            <EmpTable/>
+            <EmpTable />
           </div>
         );
-        
 
-        // case "611":
-        // return (
-        //   <div>
-        //     <Option1/>
-            
-        //   </div>
-        // );
+        case "tableSpan":
+        return (
+          <div>
+            <Table1 />
+          </div>
+        );
+
+      // case "611":
+      // return (
+      //   <div>
+      //     <Option1/>
+
+      //   </div>
+      // );
       default:
         return <p>Select a menu item</p>;
     }
@@ -142,15 +141,13 @@ const MainLayout = () => {
 
   return (
     <Layout>
-      <Sider trigger={null} collapsible collapsed={collapsed}>
+      <Sider trigger={null} collapsible collapsed={collapsed} theme={theme}>
         <div
           className="demo-logo-vertical"
           style={{
             height: "64px",
             margin: "16px",
-            background: "rgba(255,255,255,0.2)",
             borderRadius: "8px",
-            color: "#fff",
             fontSize: "20px",
             fontWeight: "bold",
             display: "flex",
@@ -198,28 +195,32 @@ const MainLayout = () => {
               children: [
                 {
                   key: "61",
-                  label:"Basic1",
-                  children:[
+                  label: "Basic1",
+                  children: [
                     {
-                      key:"611",
-                      label: "option1"
+                      key: "tableSpan",
+                      label:"Table Span"
                     },
                     {
-                      key:"612",
-                      label: "option2"
+                      key: "611",
+                      label: "option1",
                     },
                     {
-                      key:"613",
-                      label: "option3"
-                    }
-                  ]
+                      key: "612",
+                      label: "option2",
+                    },
+                    {
+                      key: "613",
+                      label: "option3",
+                    },
+                    
+                  ],
                 },
                 {
-                  key:"62",
-                  label:"Basic2"
-                }
-
-              ]
+                  key: "62",
+                  label: "Basic2",
+                },
+              ],
             },
             {
               key: "7",
@@ -241,16 +242,20 @@ const MainLayout = () => {
               key: "10",
               icon: <FundViewOutlined />,
               label: "EMP Management",
-              children:[{
-                key: "empForm",
-              label: "EMPLOYEE Form",
-              },{
-                key: "empTable",
-              label: "EMPLOYEE TABLE",
-              }, {
-                key: "empView",
-              label: "EMPLOYEE View",
-              }]
+              children: [
+                {
+                  key: "empForm",
+                  label: "EMPLOYEE Form",
+                },
+                {
+                  key: "empTable",
+                  label: "EMPLOYEE TABLE",
+                },
+                {
+                  key: "empView",
+                  label: "EMPLOYEE View",
+                },
+              ],
             },
           ]}
         />
