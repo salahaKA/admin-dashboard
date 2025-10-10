@@ -1,4 +1,4 @@
-import { PlusOutlined } from "@ant-design/icons";
+import { BackwardOutlined, PlusOutlined } from "@ant-design/icons";
 import { Button, Descriptions } from "antd";
 import React from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
@@ -32,7 +32,7 @@ const TableView = () => {
       </Descriptions>
       <div style={{ marginTop: 20, display: "flex", justifyContent:"flex-end" }} >
         <Button icon={<PlusOutlined/>} variant="solid" color="green" onClick={() => navigate(-1)} style={{justifyContent:"end"}}>
-          BACK TO TABLE
+          {<BackwardOutlined/>} GO BACK TO TABLE
         </Button>
       </div>
     </div>

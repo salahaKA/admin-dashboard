@@ -23,6 +23,7 @@ import EmpForm from "./EmployeeManagement/EmpComponents/EmpForm";
 import EmpTable from "./EmployeeManagement/EmpComponents/EmpTable";
 import ViewEmp from "./EmployeeManagement/EmpComponents/ViewEmp";
 import Table1 from "./Basic/TableSpan/Table1";
+import Dropdown from "./Basic/Dropdown/Dropdown";
 
 const { Header, Sider, Content, Footer } = Layout;
 
@@ -126,6 +127,12 @@ const MainLayout = () => {
             <Table1 />
           </div>
         );
+        case "dropdown":
+        return (
+          <div>
+            <Dropdown />
+          </div>
+        );
 
       // case "611":
       // return (
@@ -218,7 +225,12 @@ const MainLayout = () => {
                 },
                 {
                   key: "62",
-                  label: "Basic2",
+                  label: "ANT D",
+                  children:[{
+                    key:"dropdown",
+                    label:"DropDown"
+                  }]
+
                 },
               ],
             },

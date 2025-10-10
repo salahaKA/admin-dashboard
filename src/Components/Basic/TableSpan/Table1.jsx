@@ -66,6 +66,7 @@ const Table1 = () => {
         dataSource={data}
         columns={cols}
         rowKey="id"
+        style={{ padding: 20, Swidth:"1600px"}}
         bordered
         pagination={{ pageSize: 10 }}
         onRow={(record)=>({

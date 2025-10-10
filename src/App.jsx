@@ -13,6 +13,7 @@ import EmpForm from "./Components/EmployeeManagement/EmpComponents/EmpForm";
 import StudentObjForm from "./Components/NormalObjectForm/StudentObjForm";
 import Table1 from "./Components/Basic/TableSpan/Table1";
 import TableView from "./Components/Basic/TableSpan/TableView";
+import MyDropdown from "./Components/Basic/Dropdown/Dropdown";
 
 const App = () => {
   const { theme } = useThemeStore();
@@ -49,6 +50,10 @@ const App = () => {
           <Route path="/studObjForm" element={<StudentObjForm/>}/>
           <Route path="/tableView" element={<TableView/>}/>
            <Route path="/tableView/:id" element={<TableView/>}/>
+
+
+           {/* DropDown */}
+           <Route path="/dropdown" element={<MyDropdown/>}/>
         </Routes>
       </BrowserRouter>
     </ConfigProvider>
